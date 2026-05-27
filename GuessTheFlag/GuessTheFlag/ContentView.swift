@@ -5,7 +5,31 @@
 //  Created by Ammar Saber on 23/05/2026.
 //
 
+/*
+ //! MARK: Challenge From View and Modifiers Section
+ 
+ 1. Go back to project 2 and replace the Image view used for flags with a new FlagImage() view that renders one flag image using the specific set of modifiers we had.
+ 
+ 2. Create a custom ViewModifier (and accompanying View extension) that makes a view have a large, blue font suitable for prominent titles in a view.
+ */
+
 import SwiftUI
+
+// Task 2: Done
+struct LargeBlueFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 48))
+            .fontWeight(.black)
+            .foregroundStyle(.background) // customized to make it suitable with the current design
+    }
+}
+extension Text {
+    func largeBlueFont() -> some View {
+        modifier(LargeBlueFont())
+    }
+}
+
 
 struct ContentView: View {
     let maxNumberOfQuestions = 8
@@ -71,8 +95,7 @@ struct ContentView: View {
                 VStack {
                     Text("Tap the flag of")
                     Text(countries[correctAnswer])
-                        .font(.system(size: 48))
-                        .fontWeight(.black)
+                        .largeBlueFont() // Task 2: Done
                 }
                 .foregroundStyle(.white)
 
@@ -80,9 +103,8 @@ struct ContentView: View {
                     Button {
                         buttonTapped(number)
                     } label: {
-                        Image(countries[number])
+                        FlagImage(country: countries[number]) // Challenge 1: Done
                     }
-                    .clipShape(.capsule)
                 }
 
                 Spacer()
@@ -131,6 +153,16 @@ struct ContentView: View {
         scoreTitle = ""
         currentQuestionNumber = 0
         askQuestion()
+    }
+}
+
+struct FlagImage: View {
+    let country: String
+    
+    var body: some View {
+        Image(country)
+            .clipShape(.capsule)
+            .shadow(radius: 10)
     }
 }
 

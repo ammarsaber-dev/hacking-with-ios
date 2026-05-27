@@ -5,6 +5,12 @@
 //  Created by Ammar Saber on 23/05/2026.
 //
 
+/*
+ //! MARK: Challenge From View and Modifiers Section
+ 
+ Go back to project 1 and use a conditional modifier to change the total amount text view to red if the user selects a 0% tip.
+ */
+
 import SwiftUI
 
 struct ContentView: View {
@@ -68,6 +74,7 @@ struct ContentView: View {
                             code: Locale.current.currency?.identifier ?? "USD"
                         )
                     )
+                    .foregroundStyle(selectedTip == 0 ? .red : .primary) // Challenge 1: Done
                 }
 
                 Section("Total amount per person") {

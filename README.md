@@ -2,8 +2,7 @@
 Hacking with iOS: SwiftUI Edition, Projects.
 
 ## WeSplit
-
-WeSplit was the first app in the course — a bill-splitting utility that introduced 
+WeSplit was the first app in the course — a bill-splitting utility that introduced
 the core building blocks of SwiftUI development.
 
 **What I learned:**
@@ -15,8 +14,7 @@ the core building blocks of SwiftUI development.
 - Rendering views dynamically using `ForEach`
 
 ## Guess the Flag
-
-A flag-guessing game that introduced SwiftUI's layout system and how the framework 
+A flag-guessing game that introduced SwiftUI's layout system and how the framework
 thinks about state-driven UI.
 
 **What I learned:**
@@ -29,3 +27,33 @@ thinks about state-driven UI.
 **What I added beyond the challenges:**
 - A difficulty picker (Easy / Medium / Hard) that controls how many flags are shown,
   built with a sorted dictionary and `onChange` to reset the game on level change
+
+## Views and Modifiers
+A technique project that went deep on how SwiftUI views and modifiers actually work under the hood.
+
+**What I learned:**
+- Why SwiftUI uses structs for views instead of classes
+- Why `some View` is necessary and how opaque return types work
+- How modifier order matters and affects layout and rendering
+- How to compose small, reusable views as building blocks for larger UIs
+- How to create custom `ViewModifier`s and `View` extensions
+
+**Challenges completed:**
+- Added a conditional modifier to WeSplit that turns the total amount text red when 0% tip is selected
+- Extracted a `FlagImage()` view in Guess the Flag to encapsulate the flag's modifiers
+- Created a custom `ViewModifier` with a `View` extension for a large, blue title font style
+
+## BetterRest
+A sleep recommendation app that introduced date/time inputs and on-device machine learning via Core ML.
+
+**What I learned:**
+- Using `DatePicker` and `Stepper` for structured user input
+- Working with `Date` and `DateComponents` to handle time
+- Placing buttons in the navigation bar with `.toolbar`
+- Training a model with Create ML and integrating it using Core ML
+- How on-device machine learning works entirely in private, with no server involved
+
+**Challenges completed:**
+- Replaced `VStack` groupings with `Section` views for a cleaner form layout
+- Swapped the cups stepper for a `Picker` covering the same range
+- Removed the Calculate button entirely, showing the recommended bedtime persistently in a large font

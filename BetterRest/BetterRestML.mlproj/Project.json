@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2026-05-28T08:21:57Z",
+        "event" : "projectCreated",
+        "id" : "4D5E35B6-96A1-4C81-86C3-FDFC0180B1F4",
+        "subtitle" : "BetterRestML",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Ammar Saber",
+  "createdDate" : "2026-05-28T08:21:57Z",
+  "description" : "",
+  "id" : "081BB1FB-A631-4CA5-ABB5-12EB2E746DA6",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2026-05-28T08:21:57Z",
+  "projectName" : "BetterRestML",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}

@@ -57,3 +57,23 @@ A sleep recommendation app that introduced date/time inputs and on-device machin
 - Replaced `VStack` groupings with `Section` views for a cleaner form layout
 - Swapped the cups stepper for a `Picker` covering the same range
 - Removed the Calculate button entirely, showing the recommended bedtime persistently in a large font
+
+## Word Scramble
+
+A word game where players build words from a randomly chosen root word, 
+introducing how SwiftUI handles lists, app bundles, and system APIs.
+
+**What I learned:**
+- Building dynamic lists with `List` and `ForEach`
+- Loading files from the app bundle using `Bundle.main.url` and `String(contentsOf:)`
+- Using `UITextChecker` to validate real English words
+- Triggering logic on view appearance with `onAppear`
+- Using `fatalError()` for truly impossible states
+- Adding toolbar buttons with `.toolbar`
+- Animated insertions with `withAnimation`
+
+**What I added beyond the challenges:**
+- A scoring system where later words are worth more — rewarding players 
+  who keep finding words rather than stopping early (`word.count × words found so far`)
+- A score display with `contentTransition(.numericText())` for a smooth animated counter
+- A custom `WordError` struct to group alert state cleanly

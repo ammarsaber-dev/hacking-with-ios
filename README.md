@@ -14,7 +14,8 @@ the core building blocks of SwiftUI development.
 - Rendering views dynamically using `ForEach`
 
 ## Guess the Flag
-A flag-guessing game that introduced SwiftUI's layout system and how the framework
+
+A flag-guessing game that introduced SwiftUI's layout system and how the framework 
 thinks about state-driven UI.
 
 **What I learned:**
@@ -23,10 +24,14 @@ thinks about state-driven UI.
 - How alerts work in SwiftUI — state-driven rather than imperatively triggered
 - Shuffling and indexing into arrays to randomize game content
 - Tracking score and question count with `@State`
+- Creating reusable views with `FlagImage`
+- Writing custom `ViewModifier` and extending `View` (and `Text`) with it
 
 **What I added beyond the challenges:**
 - A difficulty picker (Easy / Medium / Hard) that controls how many flags are shown,
   built with a sorted dictionary and `onChange` to reset the game on level change
+- Flag spin on tap using `rotation3DEffect` on the Y axis
+- Unchosen flags fade to 25% opacity and scale down to 75%
 
 ## Views and Modifiers
 A technique project that went deep on how SwiftUI views and modifiers actually work under the hood.
@@ -77,3 +82,16 @@ introducing how SwiftUI handles lists, app bundles, and system APIs.
   who keep finding words rather than stopping early (`word.count × words found so far`)
 - A score display with `contentTransition(.numericText())` for a smooth animated counter
 - A custom `WordError` struct to group alert state cleanly
+
+## Animation
+
+A technique project focused on SwiftUI's animation system — no standalone app, 
+but the challenges were applied directly to Guess the Flag.
+
+**What I learned:**
+- Implicit vs explicit animations and when to use each
+- Driving animations from state with `withAnimation`
+- `rotation3DEffect` for 3D axis-based transitions
+- Chaining `.opacity`, `.scaleEffect`, and `.animation` for coordinated effects
+- Using `.spring` and controlling its speed
+- `ViewModifier` and custom `View` extensions for reusable styling

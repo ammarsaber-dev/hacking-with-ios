@@ -6,11 +6,21 @@
 //
 
 /*
- //! MARK: Challenge From View and Modifiers Section
- 
+ // MARK: Challenges From View and Modifiers Section
+
  1. Go back to project 2 and replace the Image view used for flags with a new FlagImage() view that renders one flag image using the specific set of modifiers we had.
- 
+
  2. Create a custom ViewModifier (and accompanying View extension) that makes a view have a large, blue font suitable for prominent titles in a view.
+ */
+
+/*
+ // MARK: Challenges From Animation Section
+
+ 1. When you tap a flag, make it spin around 360 degrees on the Y axis.
+
+ 2. Make the other two buttons fade out to 25% opacity.
+
+ 3. Add a third effect of your choosing to the two flags the user didn’t choose – maybe make them scale down? Or flip in a different direction? Experiment!
  */
 
 import SwiftUI
@@ -21,7 +31,7 @@ struct LargeBlueFont: ViewModifier {
         content
             .font(.system(size: 48))
             .fontWeight(.black)
-            .foregroundStyle(.background) // customized to make it suitable with the current design
+            .foregroundStyle(.background)  // customized to make it suitable with the current design
     }
 }
 extension Text {
@@ -30,14 +40,13 @@ extension Text {
     }
 }
 
-
 struct ContentView: View {
     let maxNumberOfQuestions = 8
     let levels = [
         "Easy": 3,
         "Medium": 4,
         "Hard": 5,
-    ].sorted(by: { $0.value < $1.value } )
+    ].sorted(by: { $0.value < $1.value })
 
     @State private var countries = [
         "US", "UK", "France", "Ukraine", "Germany", "Nigeria", "Monaco",
@@ -57,6 +66,9 @@ struct ContentView: View {
 
     @State private var currentLevel = "Easy"
     @State private var numberOfAnswers = 3
+
+    @State private var selectedIndex: Int? = nil
+    @State private var animationRotation = 0.0
 
     var body: some View {
         ZStack {
@@ -83,7 +95,9 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                     .onChange(of: currentLevel) { _, newValue in
-                        if let match = levels.first(where: { $0.key == newValue }) {
+                        if let match = levels.first(where: {
+                            $0.key == newValue
+                        }) {
                             numberOfAnswers = match.value
                             reset()
                         }
@@ -95,16 +109,37 @@ struct ContentView: View {
                 VStack {
                     Text("Tap the flag of")
                     Text(countries[correctAnswer])
-                        .largeBlueFont() // Task 2: Done
+                        .largeBlueFont()  // Task 2: Done
                 }
                 .foregroundStyle(.white)
 
                 ForEach(0..<numberOfAnswers, id: \.self) { number in
                     Button {
                         buttonTapped(number)
+                        selectedIndex = number
+                        withAnimation(.spring) {
+                            animationRotation += 360
+                        }
                     } label: {
-                        FlagImage(country: countries[number]) // Challenge 1: Done
+                        FlagImage(country: countries[number])  // Challenge 1: Done
                     }
+                    
+                    // Animation Challenges
+                    .rotation3DEffect(
+                        .degrees(
+                            selectedIndex == number ? animationRotation : 0
+                        ),
+                        axis: (x: 0, y: 1, z: 0)
+                    )
+                    .opacity(
+                        selectedIndex == nil || selectedIndex == number
+                            ? 1.0 : 0.25
+                    )
+                    .scaleEffect(
+                        selectedIndex == nil || selectedIndex == number
+                            ? 1.0 : 0.75
+                    )
+                    .animation(.spring.speed(0.75), value: selectedIndex)
                 }
 
                 Spacer()
@@ -140,12 +175,15 @@ struct ContentView: View {
 
         scoreMessage = "You chose \(countries[number])"
         showScore = true
-        
+
     }
 
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        selectedIndex = nil
+        animationRotation = 0
+
     }
 
     func reset() {
@@ -158,7 +196,7 @@ struct ContentView: View {
 
 struct FlagImage: View {
     let country: String
-    
+
     var body: some View {
         Image(country)
             .clipShape(.capsule)

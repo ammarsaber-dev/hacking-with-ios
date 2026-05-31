@@ -95,3 +95,25 @@ but the challenges were applied directly to Guess the Flag.
 - Chaining `.opacity`, `.scaleEffect`, and `.animation` for coordinated effects
 - Using `.spring` and controlling its speed
 - `ViewModifier` and custom `View` extensions for reusable styling
+
+## iExpense
+
+An expense tracker that introduced data persistence, observable classes, 
+and sheet-based navigation in SwiftUI.
+
+**What I learned:**
+- Using `@Observable` to create a reference-type model that drives the UI
+- Persisting data with `UserDefaults` and encoding/decoding using `Codable`
+- Presenting sheets with `.sheet` and dismissing them via `@Environment(\.dismiss)`
+- Deleting items from a `List` with `onDelete` and `IndexSet`
+- Separating model logic into its own file (`ExpenseItem.swift`)
+- Using `enum` with `CaseIterable` and `Identifiable` for type-safe pickers
+
+**What I added beyond the challenges:**
+- Split the list into Personal and Business sections with independent delete 
+  logic — mapping filtered offsets back to the main array by ID to avoid 
+  index mismatches
+- Color-coded amounts (green / yellow / red) based on value thresholds
+- Locale-aware currency formatting using `Locale.current.currency`
+- EditButton that only appears when the list has items
+- Replaced the instructor's plain string array for expense types with a proper `enum` (`ExpenseType`) conforming to `CaseIterable`, `Identifiable`, and `Codable` — making the picker type-safe and the model serialization cleaner

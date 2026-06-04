@@ -117,3 +117,26 @@ and sheet-based navigation in SwiftUI.
 - Locale-aware currency formatting using `Locale.current.currency`
 - EditButton that only appears when the list has items
 - Replaced the instructor's plain string array for expense types with a proper `enum` (`ExpenseType`) conforming to `CaseIterable`, `Identifiable`, and `Codable` — making the picker type-safe and the model serialization cleaner
+
+## Moonshot
+
+A NASA-themed app that introduced custom layouts, JSON decoding, generics, and multi-screen navigation in SwiftUI.
+
+**What I learned:**
+- Loading and decoding JSON from the app bundle using `Codable`
+- Creating reusable decoding helpers with generics (`<T: Codable>`)
+- Building adaptive layouts with `ScrollView` and `LazyVGrid`
+- Using `NavigationStack` and `NavigationLink` to navigate between screens
+- Passing model data between views
+- Organizing larger SwiftUI apps into multiple files and reusable views
+- Working with dictionaries to efficiently relate data models
+
+**Challenges completed:**
+- Added mission launch dates to the detail screen
+- Extracted layout code into reusable views (`GridLayout` and `ListLayout`)
+- Added a toolbar button to toggle between grid and list layouts
+
+**What I added beyond the challenges:**
+- Used a `MissionLayout` enum instead of a Boolean to represent layout state
+- Refactored the toolbar toggle into a single adaptive button
+- Styled the list layout to match the app's custom dark theme

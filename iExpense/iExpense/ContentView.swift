@@ -12,6 +12,13 @@
  2. Modify the expense amounts in ContentView to contain some styling depending on their value – expenses under $10 should have one style, expenses under $100 another, and expenses over $100 a third style. What those styles are depend on you.
 
  3. For a bigger challenge, try splitting the expenses list into two sections: one for personal expenses, and one for business expenses. This is tricky for a few reasons, not least because it means being careful about how items are deleted!
+ 
+ 
+ Navigation Challenges:
+ 
+ 1. Change project 7 (iExpense) so that it uses NavigationLink for adding new expenses rather than a sheet. (Tip: The dismiss() code works great here, but you might want to add the navigationBarBackButtonHidden() modifier so they have to explicitly choose Cancel.)
+ 
+ 2. Try changing project 7 so that it lets users edit their issue name in the navigation title rather than a separate textfield. Which option do you prefer?
  */
 
 import SwiftUI
@@ -54,7 +61,7 @@ class Expenses {
 struct ContentView: View {
     @State private var expenses = Expenses()
 
-    @State private var showAddExpenseSheet = false
+//    @State private var showAddExpenseSheet = false
     
     var body: some View {
         NavigationStack {
@@ -80,17 +87,23 @@ struct ContentView: View {
 
             .navigationTitle("iExpense")
             .toolbar {
-                Button("Add expense", systemImage: "plus") {
-                    showAddExpenseSheet = true
+//                Button("Add expense", systemImage: "plus") {
+//                    showAddExpenseSheet = true
+//                }
+                
+                NavigationLink {
+                    AddView(expenses: expenses)
+                } label: {
+                    Label("Add expense", systemImage: "plus")
                 }
 
                 if !expenses.items.isEmpty {
                     EditButton()
                 }
             }
-            .sheet(isPresented: $showAddExpenseSheet) {
-                AddView(expenses: expenses)
-            }
+//            .sheet(isPresented: $showAddExpenseSheet) {
+//                AddView(expenses: expenses)
+//            }
         }
     }
 

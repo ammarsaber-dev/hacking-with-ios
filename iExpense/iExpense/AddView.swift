@@ -11,15 +11,13 @@ struct AddView: View {
     var expenses: Expenses
 
     @Environment(\.dismiss) var dismiss
-    @State private var name = ""
+    @State private var name = "Your expense"
     @State private var type: ExpenseType = .personal
     @State private var amount = 0.0
 
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Name", text: $name)
-
                 Picker("Type", selection: $type) {
                     ForEach(ExpenseType.allCases) { type in
                         Text(type.rawValue)
@@ -36,19 +34,28 @@ struct AddView: View {
                 .keyboardType(.decimalPad)
             }
 
-            .navigationTitle("Add new expense")
+            .navigationTitle($name)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarRole(.editor)
             .toolbar {
-                Button("Save") {
-                    let item = ExpenseItem(
-                        name: name,
-                        type: type,
-                        amount: amount
-                    )
-                    expenses.items.append(item)
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button("Cancel", role: .cancel) {
+                        dismiss()
+                    }
 
-                    dismiss()
+                    Button("Save") {
+                        let item = ExpenseItem(
+                            name: name,
+                            type: type,
+                            amount: amount
+                        )
+                        expenses.items.append(item)
+
+                        dismiss()
+                    }
                 }
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

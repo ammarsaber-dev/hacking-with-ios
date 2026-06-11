@@ -13,6 +13,12 @@
  2. Extract one or two pieces of view code into their own new SwiftUI views – the horizontal scroll view in MissionView is a great candidate, but if you followed my styling then you could also move the Rectangle dividers out too.
 
  3. For a tough challenge, add a toolbar item to ContentView that toggles between showing missions as a grid and as a list.
+ 
+ 
+ 
+ Navigation Challenge:
+    
+    1. Return to project 8 (Moonshot), and upgrade it to use NavigationLink(value:). This means adding Hashable conformance, and thinking carefully how to use navigationDestination().
  */
 
 import SwiftUI
@@ -52,6 +58,12 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Moonshot")
+            .navigationDestination(for: Mission.self) { mission in
+                MissionView(mission: mission, astronauts: astronauts)
+            }
+            .navigationDestination(for: Astronaut.self) { astronaut in
+                AstronautView(astronaut: astronaut)
+            }
             .background(.darkBackground)
             .preferredColorScheme(.dark)
         }
@@ -63,10 +75,8 @@ struct ListLayout: View {
     let astronauts: [String: Astronaut]
 
     var body: some View {
-        List(missions) { mission in
-            NavigationLink {
-                MissionView(mission: mission, astronauts: astronauts)
-            } label: {
+        List(missions) { mission in            
+            NavigationLink(value: mission) {
                 HStack(spacing: 16) {
                     Image(mission.image)
                         .resizable()
@@ -95,6 +105,7 @@ struct ListLayout: View {
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
+
     }
 }
 
@@ -109,9 +120,7 @@ struct GridLayout: View {
     var body: some View {
         LazyVGrid(columns: columns) {
             ForEach(missions) { mission in
-                NavigationLink {
-                    MissionView(mission: mission, astronauts: astronauts)
-                } label: {
+                NavigationLink(value: mission) {
                     VStack {
                         Image(mission.image)
                             .resizable()

@@ -11,29 +11,27 @@ struct AstronautView: View {
     let astronaut: Astronaut
     //    let missions: [Mission]
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack {
-                    Image(astronaut.id)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 16)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(.white, lineWidth: 0.5)
-                        )
-                        .padding()
+        ScrollView {
+            VStack {
+                Image(astronaut.id)
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: 16)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(.white, lineWidth: 0.5)
+                    )
+                    .padding()
 
-                    Text(astronaut.description)
-                        .padding()
-                }
-                .navigationBarTitleDisplayMode(.inline)
+                Text(astronaut.description)
+                    .padding()
             }
-            .background(.darkBackground)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(astronaut.name)
         }
+        .background(.darkBackground)
     }
 }
 
@@ -41,5 +39,5 @@ struct AstronautView: View {
     let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
 
     return AstronautView(astronaut: astronauts["aldrin"]!)
-            .preferredColorScheme(.dark)
+        .preferredColorScheme(.dark)
 }

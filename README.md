@@ -1,6 +1,8 @@
 # Hacking with iOS
 Hacking with iOS: SwiftUI Edition, Projects.
 
+---
+
 ## WeSplit
 WeSplit was the first app in the course — a bill-splitting utility that introduced
 the core building blocks of SwiftUI development.
@@ -12,6 +14,8 @@ the core building blocks of SwiftUI development.
 - Managing state with `@State` and `@FocusState` property wrappers
 - Creating input controls like `TextField` and `Picker`
 - Rendering views dynamically using `ForEach`
+
+---
 
 ## Guess the Flag
 
@@ -33,7 +37,9 @@ thinks about state-driven UI.
 - Flag spin on tap using `rotation3DEffect` on the Y axis
 - Unchosen flags fade to 25% opacity and scale down to 75%
 
-## Views and Modifiers
+---
+
+## Views and Modifiers (Technique Project)
 A technique project that went deep on how SwiftUI views and modifiers actually work under the hood.
 
 **What I learned:**
@@ -47,6 +53,8 @@ A technique project that went deep on how SwiftUI views and modifiers actually w
 - Added a conditional modifier to WeSplit that turns the total amount text red when 0% tip is selected
 - Extracted a `FlagImage()` view in Guess the Flag to encapsulate the flag's modifiers
 - Created a custom `ViewModifier` with a `View` extension for a large, blue title font style
+
+---
 
 ## BetterRest
 A sleep recommendation app that introduced date/time inputs and on-device machine learning via Core ML.
@@ -62,6 +70,8 @@ A sleep recommendation app that introduced date/time inputs and on-device machin
 - Replaced `VStack` groupings with `Section` views for a cleaner form layout
 - Swapped the cups stepper for a `Picker` covering the same range
 - Removed the Calculate button entirely, showing the recommended bedtime persistently in a large font
+
+---
 
 ## Word Scramble
 
@@ -83,7 +93,9 @@ introducing how SwiftUI handles lists, app bundles, and system APIs.
 - A score display with `contentTransition(.numericText())` for a smooth animated counter
 - A custom `WordError` struct to group alert state cleanly
 
-## Animation
+---
+
+## Animation (Technique Project)
 
 A technique project focused on SwiftUI's animation system — no standalone app, 
 but the challenges were applied directly to Guess the Flag.
@@ -95,6 +107,8 @@ but the challenges were applied directly to Guess the Flag.
 - Chaining `.opacity`, `.scaleEffect`, and `.animation` for coordinated effects
 - Using `.spring` and controlling its speed
 - `ViewModifier` and custom `View` extensions for reusable styling
+
+---
 
 ## iExpense
 
@@ -118,25 +132,44 @@ and sheet-based navigation in SwiftUI.
 - EditButton that only appears when the list has items
 - Replaced the instructor's plain string array for expense types with a proper `enum` (`ExpenseType`) conforming to `CaseIterable`, `Identifiable`, and `Codable` — making the picker type-safe and the model serialization cleaner
 
+---
+
 ## Moonshot
 
-A NASA-themed app that introduced custom layouts, JSON decoding, generics, and multi-screen navigation in SwiftUI.
+A NASA mission browser that introduced custom layouts, JSON decoding, generics, 
+and multi-screen navigation in SwiftUI.
 
 **What I learned:**
 - Loading and decoding JSON from the app bundle using `Codable`
 - Creating reusable decoding helpers with generics (`<T: Codable>`)
 - Building adaptive layouts with `ScrollView` and `LazyVGrid`
-- Using `NavigationStack` and `NavigationLink` to navigate between screens
-- Passing model data between views
-- Organizing larger SwiftUI apps into multiple files and reusable views
+- Using `NavigationStack` with `NavigationLink(value:)` and `navigationDestination` 
+  for value-based navigation
+- Adding `Hashable` conformance to structs to enable value-based navigation
+- Passing model data between views and organizing larger apps into multiple files
 - Working with dictionaries to efficiently relate data models
-
-**Challenges completed:**
-- Added mission launch dates to the detail screen
-- Extracted layout code into reusable views (`GridLayout` and `ListLayout`)
-- Added a toolbar button to toggle between grid and list layouts
 
 **What I added beyond the challenges:**
 - Used a `MissionLayout` enum instead of a Boolean to represent layout state
 - Refactored the toolbar toggle into a single adaptive button
 - Styled the list layout to match the app's custom dark theme
+- Registered two `navigationDestination` handlers — one for `Mission`, one for 
+  `Astronaut` — so tapping a crew member navigates directly to their profile
+
+---
+
+## Navigation (Technique Project)
+
+A technique project focused on SwiftUI's navigation system, with challenges 
+applied back to iExpense and Moonshot.
+
+**What I learned:**
+- The difference between destination-closure `NavigationLink` and `NavigationLink(value:)`
+- Why `Hashable` conformance is required for value-based navigation
+- Hiding the back button with `navigationBarBackButtonHidden` to enforce explicit actions
+- Editing the navigation title inline with a `Binding<String>` and `.toolbarRole(.editor)`
+
+**What I applied in iExpense:**
+- Replaced the sheet with a `NavigationLink` push to `AddView`
+- Replaced the name `TextField` with an editable `navigationTitle($name)`, 
+  defaulting to "Your expense"

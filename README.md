@@ -173,3 +173,29 @@ applied back to iExpense and Moonshot.
 - Replaced the sheet with a `NavigationLink` push to `AddView`
 - Replaced the name `TextField` with an editable `navigationTitle($name)`, 
   defaulting to "Your expense"
+
+---
+
+## Cupcake Corner
+
+A cupcake ordering app that introduced networking, async/await, and sending/receiving 
+JSON data to and from a remote server.
+
+**What I learned:**
+- Sending data to a server with `URLRequest`, `URLSession.shared.upload`, and `async/await`
+- Decoding server responses back into Swift models with `Codable`
+- Using `@Observable` with `Codable` — and why the backing store property names 
+  require explicit `CodingKeys` mapping (`_name = "name"`)
+- Loading remote images with `AsyncImage` and handling the placeholder state
+- Using `@Bindable` to mutate an `@Observable` class passed into a child view
+- Disabling navigation based on form validation state
+
+**What I added beyond the challenges:**
+- Whitespace-aware address validation using `trimmingCharacters(in:)` across 
+  all four fields in a single pipeline
+- Network error alert with a separate Boolean so success and failure states 
+  are handled independently
+- Persisted the full order to `UserDefaults` using static `load()` and instance 
+  `save()` methods — avoiding getter/setter conflicts with `Codable` by keeping 
+  persistence logic inside the model
+- Saved on every meaningful change via `onChange` modifiers rather than only on dismiss

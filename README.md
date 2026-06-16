@@ -199,3 +199,30 @@ JSON data to and from a remote server.
   `save()` methods — avoiding getter/setter conflicts with `Codable` by keeping 
   persistence logic inside the model
 - Saved on every meaningful change via `onChange` modifiers rather than only on dismiss
+
+---
+
+## Bookworm
+
+A book tracking app that introduced SwiftData for persistent storage and 
+custom reusable SwiftUI components.
+
+**What I learned:**
+- Setting up SwiftData with `@Model`, `modelContainer`, and `modelContext`
+- Querying and sorting persisted data with `@Query` and `SortDescriptor`
+- Inserting and deleting model objects via `modelContext`
+- Building custom UI components with `@Binding` — a star `RatingView` and 
+  an emoji `EmojiRatingView`
+- Using `TextEditor` for multi-line text input
+- Making enums work with SwiftData using `Codable` conformance
+- Using `@Environment(\.modelContext)` and `@Environment(\.dismiss)` in child views
+
+**What I added beyond the challenges:**
+- Form validation in `AddBookView` using the same trimming pipeline from previous 
+  projects — Save button stays disabled until title, author, and review are all filled
+- Highlighted 1-star books with a red row background using `.listRowBackground` 
+  instead of just coloring the text — subtler and more polished
+- Added `date` to the `Book` model with a default of `Date.now`, displayed in 
+  `DetailView` with both date and time formatted
+- Used a `Genre` enum with `CaseIterable` and `Codable` instead of raw strings, 
+  making genre handling type-safe throughout

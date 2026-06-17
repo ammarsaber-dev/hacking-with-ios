@@ -1,5 +1,7 @@
 # Hacking with iOS
-Hacking with iOS: SwiftUI Edition, Projects.
+
+Projects built while working through Hacking with Swift's 100 Days of SwiftUI by Paul Hudson.
+Each section below covers what the project taught and what I added beyond the standard course challenges.
 
 ---
 
@@ -226,3 +228,47 @@ custom reusable SwiftUI components.
   `DetailView` with both date and time formatted
 - Used a `Genre` enum with `CaseIterable` and `Codable` instead of raw strings, 
   making genre handling type-safe throughout
+
+---
+
+## SwiftData Project (Technique Project)
+
+A technique project focused on SwiftData fundamentals — relationships, cascading
+deletes, and dynamic queries — using a Users/Jobs model.
+
+**What I learned:**
+- Defining one-to-many relationships between `@Model` classes (`User` has many `Job`s)
+- Cascade delete rules with `@Relationship(deleteRule: .cascade)` and how they
+  propagate through nested relationships
+- Filtering `@Query` results with `#Predicate` based on a dynamic date threshold
+- Sorting with multiple `SortDescriptor`s, including a secondary tiebreaker field
+- Bulk deleting all instances of a model with `modelContext.delete(model:)`
+- Driving `@Query` parameters (filter, sort) through a child view's `init`
+
+**What I added beyond the challenges:**
+- A toggle button to switch between showing all users and only those joining
+  in the future, using `.distantPast` vs `.now` as the predicate threshold
+- Animated sort order changes with `$sortOrder.animation()`
+- A job count badge next to each user in the list
+
+---
+
+## iExpense (SwiftData Upgrade)
+
+Challenges from the SwiftData technique project, applied back to iExpense —
+migrating it from UserDefaults to SwiftData with dynamic sorting and filtering.
+
+**What I learned:**
+- Migrating a `Codable` + `UserDefaults` model to a SwiftData `@Model`
+- Using `@Query` with dynamic `filter` and `sort` parameters passed through init
+- Building predicates with `#Predicate` macros
+- Driving `@Query` reactively from parent-owned `@State` (filter/sort can't be
+  mutated directly on an existing `@Query`)
+- Setting up `.modelContainer` at the app entry point
+
+**What I added beyond the challenges:**
+- Filter menu (All / Personal / Business) built from an `ExpenseFilter` enum
+  that maps to `#Predicate` cases
+- Sort menu (by name / by price) using tagged `SortDescriptor` arrays, with
+  price sort using a reverse order plus name as a secondary tiebreaker
+- Kept currency formatting and color-coded amount styling from the original version

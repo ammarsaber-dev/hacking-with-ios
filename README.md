@@ -272,3 +272,29 @@ migrating it from UserDefaults to SwiftData with dynamic sorting and filtering.
 - Sort menu (by name / by price) using tagged `SortDescriptor` arrays, with
   price sort using a reverse order plus name as a secondary tiebreaker
 - Kept currency formatting and color-coded amount styling from the original version
+
+---
+
+## Instafilter
+
+A photo filter app using Core Image to apply real-time effects, introducing 
+PhotosPicker, confirmation dialogs, and App Store review prompts.
+
+**What I learned:**
+- Picking photos with `PhotosPicker` and loading them via `loadTransferable`
+- The Core Image pipeline: `UIImage` → `CIImage` → apply filter → `CGImage` → `UIImage`
+- Why `CIContext` should be created once and reused across renders, not recreated per-image
+- Why widening `currentFilter`'s type to `CIFilter` loses filter-specific properties 
+  (like `.intensity`), and using `setValue(forKey:)` with `inputKeys` checks as the fix
+- Presenting a `confirmationDialog` to let users pick between several filters
+- Showing `ContentUnavailableView` for empty states
+- Sharing images with `ShareLink` and `SharePreview`
+- Requesting App Store reviews with `@Environment(\.requestReview)`, gated by 
+  a `@AppStorage` counter
+
+**What I added beyond the challenges:**
+- Four independent sliders (Intensity, Radius, Scale, Amount) instead of one, 
+  each only applied if the current filter actually supports that input key
+- Ten Core Image filters in the picker instead of the minimum three 
+  (Crystallize, Edges, Gaussian Blur, Pixellate, Sepia Tone, Unsharp Mask, 
+  Vignette, Bloom, Thermal, Vibrance)

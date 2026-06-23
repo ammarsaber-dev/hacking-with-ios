@@ -298,3 +298,31 @@ PhotosPicker, confirmation dialogs, and App Store review prompts.
 - Ten Core Image filters in the picker instead of the minimum three 
   (Crystallize, Edges, Gaussian Blur, Pixellate, Sepia Tone, Unsharp Mask, 
   Vignette, Bloom, Thermal, Vibrance)
+
+---
+
+## Bucket List
+
+A travel planning app combining MapKit, biometric authentication, secure local 
+storage, and a live Wikipedia API integration — the biggest project in the 
+course so far.
+
+**What I learned:**
+- Displaying interactive maps with `Map`, `MapReader`, and `Annotation`
+- Converting tap coordinates to real-world coordinates with `proxy.convert`
+- Biometric authentication using `LAContext` and `LocalAuthentication`
+- Securely writing data to disk with `Data.write(options: [.atomic, .completeFileProtection])`
+- Finding the documents directory via `URL.documentsDirectory`
+- Conforming to `Comparable` on a custom type (`Page`) to sort API results
+- Fetching and decoding live data from the Wikipedia API with nested `Codable` structs
+- Splitting a single screen into separate view models (`ContentView.ViewModel` 
+  and `EditView.ViewModel`) and correctly keeping `dismiss`/`onSave` in the view 
+  layer rather than the model
+
+**What I added beyond the challenges:**
+- Map style toggle (standard / hybrid) via a `MapView` enum and `.mapStyle` modifier, 
+  with the toolbar button icon and label swapping based on current mode
+- A custom `Error` struct on the view model to drive a unified alert for both 
+  biometric and other failure states
+- A `LoadingState` enum (`.loading` / `.loaded` / `.failed`) driving the nearby 
+  places section instead of just a Boolean flag

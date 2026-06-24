@@ -28,6 +28,7 @@ struct CrewScrollView: View {
                                             lineWidth: 1
                                         )
                                 )
+                                .accessibilityLabel(crewMember.astronaut.name)
 
                             VStack(alignment: .leading) {
                                 Text(crewMember.astronaut.name)

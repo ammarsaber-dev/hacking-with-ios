@@ -29,6 +29,10 @@ struct ItemView: View {
             )
             .foregroundStyle(styleAmount(expense.amount))
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            "\(expense.name), \(expense.amount.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD")))" // "Coffee, amount four dollars and ninety-nine cents"
+        ).accessibilityHint("Type: \(expense.type)")
     }
 
     // Challenge 2 Done

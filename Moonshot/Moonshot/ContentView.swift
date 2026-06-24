@@ -127,6 +127,8 @@ struct GridLayout: View {
                             .scaledToFit()
                             .frame(width: 100, height: 100)
                             .padding()
+                            .accessibilityLabel(mission.displayName)
+                        
                         VStack {
                             Text(mission.displayName)
                                 .font(.headline)

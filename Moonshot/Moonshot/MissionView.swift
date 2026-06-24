@@ -20,6 +20,7 @@ struct MissionView: View {
                     .containerRelativeFrame(.horizontal) { width, axis in
                         width * 0.6
                     }
+                    .accessibilityLabel(mission.displayName)
                 
                 // Challenge 1 Done
                 Text(mission.formattedLaunchDate)

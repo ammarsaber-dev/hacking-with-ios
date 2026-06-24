@@ -326,3 +326,35 @@ course so far.
   biometric and other failure states
 - A `LoadingState` enum (`.loading` / `.loaded` / `.failed`) driving the nearby 
   places section instead of just a Boolean flag
+
+---
+
+## Accessibility
+
+A technique project exploring VoiceOver, Voice Control, and other accessibility 
+APIs in SwiftUI, with a sandbox of annotated examples and fixes applied back to 
+Cupcake Corner, iExpense, and Moonshot.
+
+**What I learned:**
+- `.accessibilityLabel` and `.accessibilityHint` to control what VoiceOver reads, 
+  and the difference between label (read immediately) and hint (read after a delay)
+- Preferring `Button` over `.onTapGesture` so VoiceOver correctly identifies 
+  interactive elements without needing manually added/removed traits
+- Hiding purely decorative images from the accessibility tree with 
+  `Image(decorative:)` or `.accessibilityHidden(true)`
+- Grouping related views into a single accessibility element with 
+  `.accessibilityElement(children: .combine)` vs `.ignore`
+- Separating a control's label from its value using `.accessibilityValue`, and 
+  supporting VoiceOver swipe gestures with `.accessibilityAdjustableAction`
+- Supporting Voice Control with `.accessibilityInputLabels`, letting users 
+  trigger controls with alternate phrases ("Tap JFK" instead of the full label)
+
+**What I applied across previous projects:**
+- **Cupcake Corner:** hid the decorative cupcake image and loading spinner from 
+  VoiceOver with `.accessibilityHidden(true)`
+- **iExpense:** combined each expense row into a single accessibility element — 
+  name and formatted amount read together as the label, with the expense type 
+  moved into the hint instead of being read as a separate line
+- **Moonshot:** added accessibility labels to every meaningful image across the 
+  app — mission images in both grid and list layouts, the mission detail badge, 
+  crew member thumbnails in the horizontal scroll, and the astronaut profile image

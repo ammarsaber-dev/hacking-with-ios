@@ -24,7 +24,8 @@ struct AstronautView: View {
                             .strokeBorder(.white, lineWidth: 0.5)
                     )
                     .padding()
-
+                    .accessibilityLabel(astronaut.name)
+                
                 Text(astronaut.description)
                     .padding()
             }

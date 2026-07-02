@@ -358,3 +358,32 @@ Cupcake Corner, iExpense, and Moonshot.
 - **Moonshot:** added accessibility labels to every meaningful image across the 
   app — mission images in both grid and list layouts, the mission detail badge, 
   crew member thumbnails in the horizontal scroll, and the astronaut profile image
+
+---
+
+## Hot Prospects
+
+A conference networking app for scanning and tracking contacts via QR codes, 
+the largest project in the course so far.
+
+**What I learned:**
+- Using `TabView` with the new `Tab` API for multi-screen navigation
+- Integrating a Swift Package dependency (CodeScanner) for QR code scanning
+- Generating QR codes with `CIFilter.qrCodeGenerator()` and `.interpolation(.none)`
+- Scheduling local notifications with `UNUserNotificationCenter`, handling 
+  permission requests and fallback flows
+- Using `@AppStorage` to persist simple user data across app launches
+- Multi-selection in `List` with `EditButton` and a `Set<Prospect>` selection binding
+- Context menus and swipe actions on list rows
+- Filtering `@Query` results through a predicate built in the view's `init`
+- Adding `dateAdded` to a SwiftData model and sorting by it
+
+**What I added beyond the challenges:**
+- `ProspectRowView` as a separate extracted view for the row layout
+- Contacted/uncontacted icon shown only on the "Everyone" tab, hidden on 
+  the filtered tabs — driven by the `FilterType` passed into the row
+- Sort picker (by name / by date added, newest first) in a toolbar `Menu`
+- Bulk delete of selected prospects via a toolbar button that appears only 
+  when items are selected
+- `EditProspectView` using `@Bindable` for zero-boilerplate persistent edits 
+  — no Save button needed since SwiftData persists changes automatically
